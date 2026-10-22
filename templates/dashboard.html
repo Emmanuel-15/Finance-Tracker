@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker</title>
+</head>
+<body>
+    <h1>Finance Tracker</h1>
+    <p>Welcome to your personal Finance Dashboard!</p>
+
+    <div class="card">
+        <p>
+            Total Income
+        </p>
+        <h2>
+             {{ total_income }}
+        </h2>
+    </div>
+
+    <div class="card">
+        <p>
+           Total Expenses
+        </p>
+        <h2>
+             {{ total_expense }}
+        </h2>
+    </div>
+    <div class="card">
+        <p>
+            Current Balance
+        </p>
+        <h2>
+            {{ balance }}
+        </h2>
+        <small>Income minus Expenses</small>
+    </div>
+
+    <div claass="transact">
+        <h3>
+            Recent Transactions
+        </h3>
+        <p>
+            Show the latest income and expenses:
+        </p>
+        {% for transaction in recent_transactions %}
+            <p>
+                {{ transaction.description }} - {{ transaction.amount }}
+            </p>
+        {% empty %}
+            <p>No recent transactions available.</p>
+        {% endfor %}
+    </div>
+
+    <div class="add_transact">
+        
+    </div>
+</body>
+</html>
