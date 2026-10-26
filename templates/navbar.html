@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f7f8">
+    <title>Monetra | Your money. Your control.</title>
+    <link rel="stylesheet" href="{% static 'nexora/css/monetra.css' %}">
+    <script src="{% static 'nexora/js/monetra.js' %}" defer></script>
+</head>
+<body>
+    <header class="brand">
+        <h1><img src="https://i.pinimg.com/736x/10/43/3c/10433c98906331e048c4a9d7cff10e3a.jpg" alt="Monetra"> Monetra</h1>
+        <p>Your money. Your control.</p>
+    </header>
+
+    <aside class="sidebar">
+            <hr>
+            <nav class="navigation">
+                <p class="menu-title">MAIN MENU</p>
+
+                <a href="{% url 'dashboard' %}" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">⌂</span>
+                    Dashboard
+                </a>
+
+                <a href="{% url 'add_transaction' %}" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">＋</span>
+                    Add Transaction
+                </a>
+                <a href="{% url 'transactions' %}" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">↔</span>
+                    Transactions
+                </a>
+
+                <a href="{% url 'reports' %}" class="nav-link">
+                    <span class="nav-icon" aria-hidden="true">▥</span>
+                    Statistics / Reports
+                </a>
+            </nav>
+
+            <div class="sidebar-bottom">
+                <p class="logged-in-label">ACCOUNT</p>
+                <p class="logged-in-user"><span class="user-avatar" aria-hidden="true">{{ request.user.username|first|upper }}</span>{{ request.user.username }}</p>
+
+                <a href="{% url 'logout' %}" class="logout-link">
+                    <span class="nav-icon" aria-hidden="true">↪</span> Logout
+                </a>
+            </div>
+        </aside>
+
+    <main class="workspace">
+        {% block content %}
+        {% endblock %}
+    </main>
+</body>
+</html>

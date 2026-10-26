@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics & Reports</title>
+</head>
+<body>
+    
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+<h1>Statistics & Reports</h1>
+<p>Track cash flow, spending patterns, and balances across your accounts.</p>
+
+<section class="report-toolbar" aria-label="Chart controls">
+    <label for="report-currency-select">Chart currency</label>
+    <select id="report-currency-select">
+        {% for currency, data in report_data.items %}
+        <option value="{{ currency }}">{{ currency }}</option>
+        {% endfor %}
+    </select>
+</section>
+
+<section class="report-chart-grid" aria-label="Financial charts">
+    <article class="report-chart-card">
+        <div class="report-chart-heading">
+            <div>
+                <p class="report-eyebrow">CASH FLOW</p>
+                <h2>Income vs. expenses</h2>
+            </div>
+            <span class="chart-period">Last 6 months</span>
+        </div>
+        <div class="chart-canvas-wrap">
+            <canvas id="cashflow-chart" role="img" aria-label="Monthly income and expense bar chart"></canvas>
+        </div>
+        <div class="chart-legend">
+            <span><i class="legend-dot income-dot"></i>Income</span>
+            <span><i class="legend-dot expense-dot"></i>Expenses</span>
+        </div>
+    </article>
+
+    <article class="report-chart-card">
+        <div class="report-chart-heading">
+            <div>
+                <p class="report-eyebrow">SPENDING</p>
+                <h2>Expenses by category</h2>
+            </div>
+            <span id="category-total" class="chart-period"></span>
+        </div>
+        <div class="category-chart-layout">
+            <div class="donut-wrap">
+                <canvas id="category-chart" role="img" aria-label="Expense breakdown by category"></canvas>
+                <div class="donut-center">
+                    <span>Total spent</span>
+                    <strong id="donut-total">—</strong>
+                </div>
+            </div>
+            <div id="category-legend" class="category-legend"></div>
+        </div>
+    </article>
+</section>
+
+{{ chart_data|json_script:"report-chart-data" }}
+{% for currency, data in report_data.items %}
+    <div class="card report-summary-card">
+        <h3>{{ currency }}</h3>
+
+        <p>Income: {{ currency }} {{ data.income|floatformat:2 }}</p>
+
+        <p>Expenses: {{ currency }} {{ data.expenses|floatformat:2 }}</p>
+
+        <p>Balance: {{ currency }} {{ data.balance|floatformat:2 }}</p>
+    </div>
+{% endfor %}
+
+{% endblock %}
+</body>
+</html>

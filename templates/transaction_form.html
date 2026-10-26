@@ -1,0 +1,67 @@
+{% extends 'navbar.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction</title>
+    <link rel="stylesheet" href="{% static 'nexora/css/monetra.css' %}">
+    <script src="{% static 'nexora/js/monetra.js' %}" defer></script>
+</head>
+<body>
+
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="form">
+        <form method="POST" action="{% url 'confirm' %}">
+            {% csrf_token %}
+            <label>
+                Title:
+            </label>
+            <input type="text" name="title" placeholder="Enter your transacation title">
+            <label>
+                Amount:
+            </label>
+            <input type="number" name="amount" step="0.01" min="0.01"
+            placeholder="Enter the amount of your transaction" required>
+            <label>
+                Transaction Type:
+            </label>
+            <select name="transaction_type" required>
+            <option value="income">Income</option>
+            <option value="expense">Expense</option>
+            </select>
+            <label>
+                Currency:
+            </label>
+            <select type="text" name="currency" required>
+                {% for choice, name in currency  %}
+                <option value="{{ choice }}">{{ name }}</option>
+                {% endfor %}
+            </select>
+            <label>
+                Category:
+            </label>
+            <select name="category" required>
+                {% for x, name in category %}
+                <option value="{{x}}">
+                    {{name}}
+                </option>
+                {% endfor %}
+            </select>
+            <label>
+                Description:
+            </label>
+            <textarea name="description" rows="10px" cols="35px" placeholder="Enter a description">
+            </textarea>
+            <button type="submit">Continue</button>
+        </form>
+    </div>
+{% else %}
+    <p>Please log in to add a transaction.</p>
+{% endif %}
+{% endblock %}
+</body>
+</html>

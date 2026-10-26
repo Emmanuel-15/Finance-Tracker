@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+
+   
+{% extends 'navbar.html' %}
+
+{% block content %}
+
+<h1>Transactions</h1>
+<p>View your income and expenses.</p>
+
+<input
+    class="transaction-search"
+    type="search"
+    placeholder="Search transactions..."
+    aria-label="Search transactions">
+
+<table class="transactions-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.title }}</td>
+            <td>{{ transaction.transaction_type }}</td>
+            <td>{{ transaction.category }}</td>
+            <td>{{ transaction.amount|floatformat:2 }}</td>
+            <td>{{ transaction.currency }}</td>
+            <td>{{ transaction.date }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">You have no transactions yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+</body>
+</html>

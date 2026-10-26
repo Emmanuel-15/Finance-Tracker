@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign_Up</title>
+    <link rel="stylesheet" href="{% static 'nexora/css/monetra.css' %}">
+    <script src="{% static 'nexora/js/monetra.js' %}" defer></script>
+</head>
+<body>
+    <div class="sign_up">
+    <header>
+        SIGN UP
+    </header>
+    <small>
+        Welcome! Kindly input your details to create an account.
+    </small>
+    </div>
+
+    <div class="sign_up_form">
+        <form method="POST" action="{% url 'sign_up' %}">
+            {% csrf_token %}
+            <label>
+                Username:
+            </label>
+            <input type="text" name="username" placeholder="Enter your username" required>
+            <label>
+                Email:
+            </label>
+            <input type="email" name="email" placeholder="Enter your email address" required>
+            <label>
+                Password:
+            </label>
+            <input type="password" name="password1" placeholder="Enter your password" required>
+            <label>
+                Confirm Password:
+            </label>
+            <input type="password" name="password2" placeholder="Confirm your password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <div class="already">
+        <small>Already have an account?  <a href="{% url 'login' %}">Login</a>
+        </small>
+    </div>
+</body>
+</html>

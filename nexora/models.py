@@ -18,7 +18,7 @@ class Transaction(models.Model):
         EUR="EUR", "Euro"
         #This are all the currencies we wanna use for now. If we end up turning this project into something bigger we can add more currencies
 
-    class Categoty(models.TextChoices):
+    class Category(models.TextChoices):
         #This is for us to know the Category of Transaction we wanna make, be it an Income or an Expense
         food="food", "Food"
         transport="transport", "Transport"
@@ -54,8 +54,8 @@ class Transaction(models.Model):
 
     category=models.CharField(
         max_length=30,
-        choices=Categoty.choices,
-        default=Categoty.other
+        choices=Category.choices,
+        default=Category.other
     )
 
     description = models.TextField(blank=True)
